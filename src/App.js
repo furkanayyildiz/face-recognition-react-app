@@ -6,6 +6,7 @@ import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
+import Signin from "./components/Signin/Signin";
 
 const app = new Clarifai.App({
   apiKey: "cf2fa054274f4067860593f6457f4836",
@@ -29,6 +30,7 @@ class App extends Component {
       input: "",
       imageUrl: "",
       box: {},
+      route: "signin",
     };
   }
   calculateFaceLocation = (data) => {
@@ -61,17 +63,29 @@ class App extends Component {
       )
       .catch((err) => console.log(err));
   };
+  onRouteChange = () => {
+    this.setState({ route: "home" });
+  };
   render() {
     return (
       <div className="App">
         <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit}
-        />
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+        {this.state.route === "signin" ? (
+          <Signin onRouteChange={this.onRouteChange} />
+        ) : (
+          <div>
+            <Logo />
+            <Rank />
+            <ImageLinkForm
+              onInputChange={this.onInputChange}
+              onButtonSubmit={this.onButtonSubmit}
+            />
+            <FaceRecognition
+              box={this.state.box}
+              imageUrl={this.state.imageUrl}
+            />
+          </div>
+        )}
       </div>
     );
   }
