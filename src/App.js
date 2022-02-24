@@ -7,7 +7,7 @@ import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import Rank from "./components/Rank/Rank";
 import Signin from "./components/Signin/Signin";
-
+import Register from "./components/Register/Register";
 const app = new Clarifai.App({
   apiKey: "cf2fa054274f4067860593f6457f4836",
 });
@@ -69,11 +69,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navigation onRouteChange={this.onRouteChange} />
-        {this.state.route === "signin" ? (
-          <Signin onRouteChange={this.onRouteChange} />
-        ) : (
+        {this.state.route === "home" ? (
           <div>
+            <Navigation onRouteChange={this.onRouteChange} />
             <Logo />
             <Rank />
             <ImageLinkForm
@@ -85,6 +83,10 @@ class App extends Component {
               imageUrl={this.state.imageUrl}
             />
           </div>
+        ) : this.state.route === "signin" ? (
+          <Signin onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
         )}
       </div>
     );
