@@ -9,7 +9,7 @@ import Rank from "./components/Rank/Rank";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 const app = new Clarifai.App({
-  apiKey: "cf2fa054274f4067860593f6457f4836",
+  apiKey: "ENTER API KEY",
 });
 
 const particlesOptions = {
